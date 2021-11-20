@@ -1,4 +1,4 @@
-module github.com/ozonmp/omp-template-api/pkg/omp-template-api
+module github.com/ozonmp/est-rent-api/pkg/est-rent-api
 
 go 1.17
 
