@@ -5,8 +5,8 @@ endif
 
 export GO111MODULE=on
 
-SERVICE_NAME=omp-template-api
-SERVICE_PATH=ozonmp/omp-template-api
+SERVICE_NAME=est-rent-api
+SERVICE_PATH=ozonmp/$(SERVICE_NAME)
 
 PGV_VERSION:="v0.6.1"
 BUF_VERSION:="v0.56.0"
@@ -14,7 +14,8 @@ BUF_VERSION:="v0.56.0"
 OS_NAME=$(shell uname -s)
 OS_ARCH=$(shell uname -m)
 GO_BIN=$(shell go env GOPATH)/bin
-BUF_EXE=$(GO_BIN)/buf$(shell go env GOEXE)
+#BUF_EXE=$(GO_BIN)/buf$(shell go env GOEXE)
+BUF_EXE=buf
 
 ifeq ("NT", "$(findstring NT,$(OS_NAME))")
 OS_NAME=Windows
@@ -56,11 +57,11 @@ generate-go: .generate-install-buf .generate-go .generate-finalize-go
 
 .generate-finalize-go:
 	mv pkg/$(SERVICE_NAME)/github.com/$(SERVICE_PATH)/pkg/$(SERVICE_NAME)/* pkg/$(SERVICE_NAME)
-	rm -rf pkg/$(SERVICE_NAME)/github.com/
+	#rm -rf pkg/$(SERVICE_NAME)/github.com/
 	cd pkg/$(SERVICE_NAME) && ls go.mod || (go mod init github.com/$(SERVICE_PATH)/pkg/$(SERVICE_NAME) && go mod tidy)
 
 .generate-finalize-python:
-	find pypkg/omp-template-api -type d -exec touch {}/__init__.py \;
+	find pypkg/est-rent-api -type d -exec touch {}/__init__.py \;
 
 # ----------------------------------------------------------------
 

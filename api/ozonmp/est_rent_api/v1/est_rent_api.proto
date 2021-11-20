@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package ozonmp.est_rent_api.v1;
+
+import "validate/validate.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/ozonmp/est-rent-api/pkg/est-rent-api;est_rent_api";
+
+// EstRentApiService - Service for working with estate rent
+service EstRentApiService {
+  // CreateRentV1 - Create a estate rent
+  rpc CreateRentV1(CreateRentV1Request) returns (CreateRentV1Response) {
+    option (google.api.http) = {
+      post: "/v1/estate_rent"
+      body: "*"
+    };
+  }
+
+  // DescribeRentV1 - Describe a estate rent
+  rpc DescribeRentV1(DescribeRentV1Request) returns (DescribeRentV1Response) {
+    option (google.api.http) = {
+      get: "/v1/estate_rent/{rent_id}"
+    };
+  }
+
+  // ListRentV1 - List estate rent
+  rpc ListRentV1(ListRentV1Request) returns (ListRentV1Response) {
+    option (google.api.http) = {
+      get: "/v1/estate_rent"
+    };
+  }
+
+  // RemoveRentV1 - Remove a estate rent
+  rpc RemoveRentV1(RemoveRentV1Request) returns (RemoveRentV1Response) {
+    option (google.api.http) = {
+      delete: "/v1/estate_rent/{rent_id}"
+    };
+  }
+}
+
+message Rent {
+  uint64 id = 1;
+  uint64 renterId = 2;
+  string objectType = 3;
+  string objectInfo = 4;
+  int64 period = 5;
+  string price_decimal = 6;
+}
+
+message CreateRentV1Request {
+  uint64 renterId = 1 [(validate.rules).uint64.gt = 0];
+  string objectType = 2 [(validate.rules).string = { min_len: 2, max_len: 50 }];
+  string objectInfo = 3 [(validate.rules).string = { min_len: 2, max_len: 100 }];
+  int64 period = 4 [(validate.rules).int64.gt = 0];
+  string price_decimal = 5 [(validate.rules).string = { min_len: 2, max_len: 100 }];
+}
+
+message CreateRentV1Response {
+  Rent data = 1;
+}
+
+message DescribeRentV1Request {
+  uint64 rent_id = 1 [(validate.rules).uint64.gt = 0];
+}
+
+message DescribeRentV1Response {
+  Rent data = 1;
+}
+
+message ListRentV1Request {
+  uint64 from_rent_id = 1 [(validate.rules).uint64.gt = 0];
+  uint64 limit = 2 [(validate.rules).uint64.gt = 1];
+}
+
+message ListRentV1Response {
+  repeated Rent items = 1;
+}
+
+message RemoveRentV1Request {
+  uint64 rent_id = 1 [(validate.rules).uint64.gt = 0];
+}
+
+message RemoveRentV1Response {
+  bool found = 1;
+}
