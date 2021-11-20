@@ -164,14 +164,3 @@ func rentToPb(rent *model.Rent) *pb.Rent {
 		PriceDecimal: rent.Price.String(),
 	}
 }
-
-func pbToRent(rent *pb.Rent) *model.Rent {
-	return &model.Rent{
-		ID:         rent.Id,
-		RenterId:   rent.RenterId,
-		ObjectInfo: rent.ObjectInfo,
-		ObjectType: model.RentObjectType(rent.ObjectType),
-		Period:     time.Duration(rent.Period),
-		Price:      decimal.RequireFromString(rent.PriceDecimal),
-	}
-}
