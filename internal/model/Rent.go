@@ -5,9 +5,10 @@ import (
 	"time"
 )
 
+//Rent model
 type Rent struct {
 	ID         uint64
-	RenterId   uint64          `json:"renter_id"`
+	RenterID   uint64          `json:"renter_id"`
 	ObjectType RentObjectType  `json:"object_type"`
 	ObjectInfo string          `json:"object_info"`
 	Period     time.Duration   `json:"period"`

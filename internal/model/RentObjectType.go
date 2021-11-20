@@ -2,17 +2,20 @@ package model
 
 import "fmt"
 
+//RentObjectTypes for RentObjectType
 const (
 	House RentObjectType = "house"
 	Car   RentObjectType = "car"
 )
 
+//RentObjectType of Rent entity
 type RentObjectType string
 
 func (r RentObjectType) String() string {
 	return string(r)
 }
 
+//Icon of RentObjectType
 func (r RentObjectType) Icon() string {
 	switch r {
 	case Car:
@@ -25,6 +28,7 @@ func (r RentObjectType) Icon() string {
 	return r.String()
 }
 
+//Full type of RentObjectType
 func (r RentObjectType) Full() string {
 	switch r {
 	case Car:

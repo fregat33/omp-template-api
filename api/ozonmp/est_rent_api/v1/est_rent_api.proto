@@ -4,7 +4,6 @@ package ozonmp.est_rent_api.v1;
 
 import "validate/validate.proto";
 import "google/api/annotations.proto";
-import "google/protobuf/timestamp.proto";
 
 option go_package = "github.com/ozonmp/est-rent-api/pkg/est-rent-api;est_rent_api";
 

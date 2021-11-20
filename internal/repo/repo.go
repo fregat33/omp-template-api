@@ -8,6 +8,7 @@ import (
 )
 
 var (
+	//ErrNotFound is error when estate rent not found
 	ErrNotFound = errors.New("estate rent not found")
 )
 
@@ -29,18 +30,22 @@ func NewRepo(db *sqlx.DB, batchSize uint) Repo {
 	return &repo{db: db, batchSize: batchSize}
 }
 
+//DescribeRent get rent
 func (r *repo) DescribeRent(ctx context.Context, rentID uint64) (*model.Rent, error) {
 	return nil, nil
 }
 
+//CreateRent add new rent
 func (r *repo) CreateRent(ctx context.Context, rent *model.Rent) (*model.Rent, error) {
 	return nil, nil
 }
 
+//RemoveRent remove existed rent
 func (r *repo) RemoveRent(ctx context.Context, rentID uint64) (bool, error) {
 	return false, nil
 }
 
+//ListRent get list of rents
 func (r *repo) ListRent(ctx context.Context, fromRentID, limit uint64) ([]model.Rent, error) {
 	return nil, nil
 }

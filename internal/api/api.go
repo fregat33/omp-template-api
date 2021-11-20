@@ -48,7 +48,7 @@ func (o *rentAPI) CreateRentV1(
 
 	price, _ := decimal.NewFromString(req.PriceDecimal)
 	rent := &model.Rent{
-		RenterId:   req.RenterId,
+		RenterID:   req.RenterId,
 		ObjectInfo: req.ObjectInfo,
 		ObjectType: model.RentObjectType(req.ObjectType),
 		Period:     time.Duration(req.Period),
@@ -157,7 +157,7 @@ func (o *rentAPI) RemoveRentV1(
 func rentToPb(rent *model.Rent) *pb.Rent {
 	return &pb.Rent{
 		Id:           rent.ID,
-		RenterId:     rent.RenterId,
+		RenterId:     rent.RenterID,
 		ObjectInfo:   rent.ObjectInfo,
 		ObjectType:   rent.ObjectType.String(),
 		Period:       int64(rent.Period),
